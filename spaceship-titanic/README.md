@@ -70,6 +70,5 @@ O modelo Random Forest otimizado apresentou uma performance razoável (79.0% de 
 
 * Realizar engenharia de features na coluna `Cabin` (extrair Deck, Lado, talvez Número).
 * Investigar a coluna `Name` para possível criação de features de tamanho de família/grupo.
-* Testar a adição de colunas indicadoras para valores ausentes numéricos/binários.
 * Experimentar outros modelos, como Gradient Boosting (XGBoost, LightGBM).
 * Realizar uma análise de erros mais aprofundada nas previsões do modelo atual.
