@@ -59,8 +59,8 @@ O modelo final (Random Forest com os hiperparâmetros otimizados) foi avaliado n
              macro avg       0.79      0.79      0.79      1739
           weighted avg       0.79      0.79      0.79      1739
     ```
-* **Matriz de Confusão:** *(Opcional: Cole a imagem do heatmap aqui ou descreva os principais erros)*
-* **Importância das Features:** As features mais importantes identificadas pelo modelo foram `TotalSpending`, `CryoSleep`, `Spa`, `FoodCourt` e `VRDeck`. *(Opcional: Cole a imagem do gráfico de barras das top features aqui)*
+* **Matriz de Confusão:**
+* **Importância das Features:** As features mais importantes identificadas pelo modelo foram `TotalSpending`, `CryoSleep`, `Spa`, `FoodCourt` e `VRDeck`.
 
 ## 5. Conclusões e Próximos Passos
 
