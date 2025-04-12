@@ -1,6 +1,6 @@
 # Análise e Modelo - Kaggle Spaceship Titanic 
 
-Este projeto aborda a competição [Spaceship Titanic do Kaggle](https://www.kaggle.com/competitions/spaceship-titanic). O objetivo é construir um modelo de Machine Learning para prever quais passageiros foram transportados para uma dimensão alternativa durante uma colisão com uma anomalia do espaço-tempo, com base em dados recuperados do sistema danificado da nave. Esta é a Versão 1 do projeto, focando em estabelecer um *pipeline* funcional e um modelo *baseline* robusto.
+Este projeto aborda a competição [Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic) do Kaggle. O objetivo é construir um modelo de Machine Learning para prever quais passageiros foram transportados para uma dimensão alternativa durante uma colisão com uma anomalia do espaço-tempo, com base em dados recuperados do sistema danificado da nave. Esta é a Versão 1 do projeto, focando em estabelecer um *pipeline* funcional e um modelo *baseline* robusto.
 
 Os dados foram fornecidos pelo Kaggle em formato CSV e incluem informações sobre os passageiros, como:
 
