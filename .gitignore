@@ -3,3 +3,4 @@ Untitled.ipynb
 spaceship-titanic/*_processed.csv 
 spaceship-titanic/Random_forest_model.ipynb 
 # Ignora tudo em spaceship-titanic/, exceto EDA e README  spaceship-titanic/*  !spaceship-titanic/EDA.ipynb  !spaceship-titanic/README.md 
+!spaceship-titanic/models.ipynb 
