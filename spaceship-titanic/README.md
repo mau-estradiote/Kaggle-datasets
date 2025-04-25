@@ -1,74 +1,100 @@
-# Análise e Modelo - Kaggle Spaceship Titanic 
+# Projeto Spaceship Titanic - Previsão de Transporte (Kaggle)
 
-Este projeto aborda a competição [Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic) do Kaggle. O objetivo é construir um modelo de Machine Learning para prever quais passageiros foram transportados para uma dimensão alternativa durante uma colisão com uma anomalia do espaço-tempo, com base em dados recuperados do sistema danificado da nave. Esta é a Versão 1 do projeto, focando em estabelecer um *pipeline* funcional e um modelo *baseline* robusto.
+## 1. Introdução e Objetivo
 
-Os dados foram fornecidos pelo Kaggle em formato CSV e incluem informações sobre os passageiros, como:
+Este projeto aborda a competição [Spaceship Titanic do Kaggle](https://www.kaggle.com/competitions/spaceship-titanic). O objetivo é construir um modelo de Machine Learning para prever quais passageiros (variável `Transported`) foram transportados para uma dimensão alternativa durante uma colisão da nave, com base em dados recuperados do sistema danificado.
+
+Esta documentação reflete a Versão 1 do projeto, focando em estabelecer um pipeline funcional desde a análise exploratória até a avaliação de modelos de classificação robustos. O trabalho foi estruturado em dois notebooks Jupyter principais:
+
+1.  `EDA_Preprocessing.ipynb`: Contém a Análise Exploratória dos Dados (EDA) e todo o Pré-processamento, gerando arquivos `.csv` com os dados limpos e preparados.
+2.  `Modeling.ipynb`: Carrega os dados processados e foca no treinamento, ajuste de hiperparâmetros e avaliação dos modelos de Machine Learning.
+
+## 2. O Dataset
+
+Os dados foram fornecidos pelo Kaggle (`train.csv`, `test.csv`) e incluem informações como:
 
 * Dados demográficos (`PassengerId`, `HomePlanet`, `Name`, `Age`)
 * Detalhes da viagem (`CryoSleep`, `Cabin`, `Destination`, `VIP`)
-* Registros de gastos em serviços a bordo (`RoomService`, `FoodCourt`, `ShoppingMall`, `Spa`, `VRDeck`)
-* A variável alvo (`Transported` - True/False) presente no conjunto de treino.
+* Registros de gastos a bordo (`RoomService`, `FoodCourt`, `ShoppingMall`, `Spa`, `VRDeck`)
+* A variável alvo (`Transported` - True/False) presente apenas no conjunto de treino.
 
-  ## 3. *Workflow* e Metodologia
+## 3. Workflow e Metodologia
 
-O desenvolvimento seguiu as seguintes etapas:
+O desenvolvimento seguiu as seguintes etapas principais, detalhadas nos notebooks:
 
-### 3.1. *Exploratory Data Analysis* (EDA)
+### 3.1. Análise Exploratória de Dados (EDA)
 
-* Análise inicial de tipos de dados e valores ausentes (NaNs), identificando colunas com maior percentual de ausência (como `Spa`, `VRDeck`, etc.).
-* Criação da *feature* `TotalSpending` (soma dos gastos individuais) e análise de sua distribuição, que se mostrou altamente assimétrica (muitos valores zero). Cerca de 45% dos passageiros não tiveram gastos registrados.
-* Análise das distribuições das features numéricas (`Age`, gastos) em relação ao alvo `Transported`. Observou-se que passageiros com gastos totais/individuais iguais a zero tinham maior probabilidade de serem transportados.
-* Análise das features categóricas/binárias:
-    * `CryoSleep` mostrou ser um forte indicador (quem estava em sono criogênico tinha taxa de transporte muito maior).
-    * `HomePlanet` também mostrou relevância (passageiros da Terra eram menos transportados, de Europa mais transportados).
-    * `Destination` e `VIP` pareceram ter menos impacto inicial.
-* Cálculo da matriz de correlação, confirmando relações lineares fracas entre a maioria das features numéricas e o alvo, mas destacando correlações negativas (fracas) entre os gastos (`RoomService`, `Spa`, `VRDeck`, `TotalSpending`) e `Transported`.
+* Análise inicial de tipos, valores únicos e dados ausentes (NaNs), com destaque para colunas de gastos e `Age`.
+* Investigação das distribuições das variáveis numéricas e categóricas.
+* Análise da correlação entre features numéricas e a variável alvo, mostrando relações lineares fracas em geral, mas indicando tendências (ex: correlação negativa entre gastos e `Transported`).
+* Identificação de padrões importantes:
+    * A feature `CryoSleep` mostrou forte correlação com `Transported`.
+    * `HomePlanet` indicou diferenças significativas (passageiros da Terra menos transportados, Europa mais).
+    * Um grande número de passageiros (~45%) não possuía gastos registrados (`TotalSpending == 0`), e este grupo tinha maior probabilidade de ser transportado.
+* Engenharia de Features inicial baseada na EDA:
+    * Criação de `TotalSpending` (soma dos gastos).
+    * Criação de `ZeroSpending` (flag binária para gasto total nulo).
+    * Extração de `GroupSize` a partir da estrutura do `PassengerId`.
+    * Decomposição da `Cabin` em `Deck`, `Num` (descartado nesta versão) e `Side`.
 
 ### 3.2. Pré-processamento
 
-* **Tratamento de *Missing Values* **Criei funções customizadas ao invés de usar do scikit-learn, afim de aprimorar algumas habilidades. *Nota: Colunas indicadoras de ausência não foram adicionadas nesta versão, visto que em análise prévia o modelo não usou tais features.*
-* **Engenharia de Features:** Criação da coluna `TotalSpending`.
+Aplicado de forma consistente aos dados de treino e teste:
+
+* **Tratamento de Missing Values:** Utilizadas funções customizadas (via notebook `EDA_Preprocessing.ipynb`) para imputar NaNs, usando mediana para features numéricas e moda para categóricas/binárias. *Nota: Colunas indicadoras de ausência explícitas não foram mantidas na versão final, pois análise de importância prévia mostrou baixo impacto para o Random Forest.*
+* **Engenharia de Features:** Adicionadas as colunas `TotalSpending`, `ZeroSpending`, `GroupSize`, `Deck`, `Side`.
 * **Codificação de Features:**
-    * Features Categóricas (`HomePlanet`, `Destination`): Codificadas através do método de *One-Hot Encoding*.
-    * Features Binárias (`CryoSleep`, `VIP`): Convertidas para formato numérico 0/1.
-* **Escalonamento:** Não foi aplicado, pois o modelo escolhido (Random Forest) não é sensível à escala das features numéricas.
-* **Features Excluídas:** `PassengerId`, `Name`, `Cabin` (nesta versão).
-* **Divisão Treino/Validação:** O conjunto de treino foi dividido em 80% para treino e 20% para validação local, usando `train_test_split` com estratificação pela variável alvo.
+    * Categóricas (`HomePlanet`, `Destination`, `Deck`): One-Hot Encoding.
+    * Binárias (`CryoSleep`, `VIP`, `Side`): Conversão para 0/1.
+* **Features Excluídas:** `PassengerId`, `Name`, `Cabin` (original), `Cabin_Num`.
+* **Escalonamento:** Não aplicado, devido à escolha de modelos baseados em árvore.
+* **Divisão Treino/Validação:** O conjunto de treino original foi dividido (80% treino / 20% validação) usando `train_test_split` com `stratify=y` e `random_state` para reprodutibilidade.
 
-### 3.3. Modelagem e *Tuning*
+### 3.3. Modelagem e Tuning
 
-* **Modelo Escolhido:** `RandomForestClassifier` (Scikit-learn), devido à sua robustez a outliers, capacidade de lidar com relações não-lineares, menor chance de *overfitting* e ser recomendado para problemas de classificação.
-* **Ajuste de Hiperparâmetros:** Foi utilizado `RandomizedSearchCV` com validação cruzada (5 *folds*) para buscar uma combinação otimizada de hiperparâmetros. Os melhores parâmetros encontrados foram:
+Foram testados três modelos de classificação baseados em árvore: Random Forest, LightGBM e XGBoost. O foco inicial de tuning e análise detalhada foi no Random Forest.
+
+* **Modelo Principal:** `RandomForestClassifier` (Scikit-learn).
+* **Ajuste de Hiperparâmetros (RF):** Utilizou-se `RandomizedSearchCV` com validação cruzada (5 folds, 25 iterações) para otimizar os hiperparâmetros. Os melhores parâmetros encontrados para o RF foram:
     ```python
-    {'criterion': 'entropy', 'max_depth': 10, 'max_features': 0.5, 'min_samples_leaf': 3, 'min_samples_split': 20, 'n_estimators': 879}
+    {'criterion': 'gini', 'max_depth': 10, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'min_samples_split': 15, 'n_estimators': 666}
     ```
+* **(LGBM e XGBoost):** Também foram ajustados usando `RandomizedSearchCV` (detalhes no notebook `Modeling.ipynb`).
 
 ## 4. Resultados da Avaliação
 
-O modelo final (*Random Forest* com os hiperparâmetros otimizados) foi avaliado no conjunto de validação (20% dos dados de treino originais).
+Os modelos foram avaliados no conjunto de validação local e submetidos ao Kaggle. Os resultados foram consistentes entre os três modelos testados:
 
-* **Acurácia:** 79.0%
+* **Random Forest:** Acurácia Validação ≈ **80.0%** | Score Kaggle ≈ **0.791**
+* **LightGBM:** Acurácia Validação ≈ **79.4%** | Score Kaggle ≈ **0.791**
+* **XGBoost:** Acurácia Validação ≈ **79.3%** | Score Kaggle ≈ **0.791**
+
+**Detalhes do Melhor Modelo (Random Forest na Validação):**
+
 * **Relatório de Classificação:**
     ```
                          precision    recall  f1-score   support
 
-    Não Transportado (0)       0.80      0.76      0.78       863
-      Transportado (1)       0.78      0.81      0.79       876
+    Não Transportado (0)       0.81      0.77      0.79       863
+      Transportado (1)       0.78      0.82      0.80       876
 
-              accuracy                           0.79      1739
-             macro avg       0.79      0.79      0.79      1739
-          weighted avg       0.79      0.79      0.79      1739
+              accuracy                           0.80      1739
+             macro avg       0.80      0.80      0.80      1739
+          weighted avg       0.80      0.80      0.80      1739
     ```
-* **Matriz de Confusão:**
-* **Importância das Features:** As features mais importantes identificadas pelo modelo foram `TotalSpending`, `CryoSleep`, `Spa`, `FoodCourt` e `VRDeck`.
+* **Matriz de Confusão:** `[[666 TN, 197 FP], [159 FN, 717 TP]]`, indicando um número ligeiramente maior de Falsos Positivos. *(Recomendado: Inserir imagem do heatmap aqui)*.
+* **Importância das Features:** As features mais relevantes para o modelo RF foram `TotalSpending`, `ZeroSpending`, `Spa`, `FoodCourt` e `CryoSleep`. Features derivadas de `Cabin` (`Deck`, `Side`) e `GroupSize` tiveram importância secundária nesta configuração. *(Recomendado: Inserir imagem do gráfico de importância aqui)*.
 
 ## 5. Conclusões e Próximos Passos
 
-O modelo Random Forest otimizado apresentou uma performance razoável (79.0% de acurácia na validação) para esta primeira versão, confirmando a importância dos gastos totais e do estado de criosono.
+O pipeline desenvolvido e o modelo Random Forest otimizado atingiram uma performance sólida e competitiva (Acurácia ~80% validação, ~79% Kaggle) para esta primeira versão, utilizando features criadas a partir da EDA (`TotalSpending`, `ZeroSpending`, `GroupSize`) e da decomposição da `Cabin`. A importância do estado de `CryoSleep` e dos padrões de gastos foi confirmada.
 
 **Próximos Passos Planejados:**
 
-* Realizar engenharia de features na coluna `Cabin` (extrair Deck, Lado, talvez Número).
-* Investigar a coluna `Name` para possível criação de features de tamanho de família/grupo.
-* Experimentar outros modelos, como Gradient Boosting (XGBoost, LightGBM).
-* Realizar uma análise de erros mais aprofundada nas previsões do modelo atual.
+* **Refinar Engenharia de Features:**
+    * Investigar o `Cabin_Num` (descartado) através de binning ou outras técnicas.
+    * Analisar a feature `Name` para extrair tamanho de família/grupo e comparar com `GroupSize`.
+    * Experimentar encodings alternativos para `Deck` (ex: Target Encoding com validação cruzada).
+* **Otimizar Modelos:** Realizar tuning mais extenso para LightGBM e XGBoost.
+* **Análise de Erros:** Investigar os erros de classificação (Falsos Positivos e Negativos) para gerar novos insights.
+* **Testar Ensembling/Stacking:** Combinar as previsões dos diferentes modelos.
