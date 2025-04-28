@@ -82,8 +82,7 @@ Os modelos foram avaliados no conjunto de validação local e submetidos ao Kagg
              macro avg       0.80      0.80      0.80      1739
           weighted avg       0.80      0.80      0.80      1739
     ```
-* **Matriz de Confusão:** `[[666 TN, 197 FP], [159 FN, 717 TP]]`, indicando um número ligeiramente maior de Falsos Positivos. *(Recomendado: Inserir imagem do heatmap aqui)*.
-* **Importância das Features:** As features mais relevantes para o modelo RF foram `TotalSpending`, `ZeroSpending`, `Spa`, `FoodCourt` e `CryoSleep`. Features derivadas de `Cabin` (`Deck`, `Side`) e `GroupSize` tiveram importância secundária nesta configuração. *(Recomendado: Inserir imagem do gráfico de importância aqui)*.
+* **Importância das Features:** As features mais relevantes para o modelo RF foram `TotalSpending`, `ZeroSpending`, `Spa`, `FoodCourt` e `CryoSleep`. Features derivadas de `Cabin` (`Deck`, `Side`) e `GroupSize` tiveram importância secundária nesta configuração.
 
 ## 5. Conclusões e Próximos Passos
 
