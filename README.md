@@ -18,7 +18,7 @@ Vou listar aqui os projetos que desenvolvi até o momento. Cada pasta contém um
 
 * ### 🚀 [Spaceship Titanic - Previsão de Transporte](./spaceship-titanic/)
     * **Descrição:** Análise e modelo de classificação (Random Forest) para prever quais passageiros foram transportados para outra dimensão.
-    * **Status:** Versão 1 concluída (Acurácia ~79%). Próximos passos incluem engenharia de features da coluna 'Cabin'.
+    * **Status:** *Pipeline* V1 (EDA -> Preproc -> *Tuning*) concluído. Modelos RF, LGBM e XGBoost atingiram performance similar: ~80% acurácia (validação) / ~0.791 (Kaggle). Próximo passo: Usar *insights* dos modelos e refinar a engenharia de *features*.
 
 * *(projetos futuros...)*
 
