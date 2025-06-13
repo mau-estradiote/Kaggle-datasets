@@ -1,0 +1,33 @@
+    # Python auto-generated files
+# Possible python generated files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+# Virtual Environment folders
+venv/
+.venv/
+env/
+fertilizer_env/
+
+
+# IDE and OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+# --- Project-Specific Ignores ---
+
+data/
+
+
+
+mlruns/
+
+
+
+models/
