@@ -1,29 +1,34 @@
-# Projetos de Machine Learning com Datasets do Kaggle
+# Machine Learning Projects Repository
 
-Bem-vindo(a) ao meu repositório de projetos de Data Science e Machine Learning!
+Welcome to my Data Science and Machine Learning Projects repository!
 
-Este espaço é dedicado à aplicação prática de técnicas de ML em diversos datasets da plataforma Kaggle. O objetivo principal é aprofundar meus conhecimentos e construir um portfólio sólido demonstrando habilidades em todo o ciclo de vida de um projeto de dados, incluindo:
+This repository is dedicated to applying practical Machine Learning techniques to various datasets from Kaggle. The main goal is to improve my knowledge and build a strong portfolio that showcases my abilities throughout the entire data science lifecycle, including:
 
-* *Análise Exploratória de Dados* (EDA)
-* Pré-processamento e Limpeza de Dados
-* Engenharia de *Features* (*Feature Engineering*)
-* Implementação e Avaliação de Modelos Preditivos (Classificação, Regressão, etc.)
-* Interpretação de Métricas e Resultados
+* Exploratory Data analysis (EDA)
+* Data cleaning and preprocessing
+* Feature Engineering
+* Implementing and Evaluating Predictive Models (e.g., Classification, Regression)
+* Interpretation of Metrics and Results
 
-  **Sobre mim:** Sou Físico e Mestre em Física Aplicada pela USP, atualmente em transição de carreira e buscando aplicar minha forte base analítica para resolver problemas complexos através da Ciência de Dados. Conecte-se comigo no [LinkedIn](https://www.linkedin.com/in/maur%C3%ADcio-estradiote-2096ab9b/)!
+  **About me:** I am a Physicist with a Master's in Applied Physics (USP) now pivoting into Data Science. I leverage my rigorous analytical and problem-solving background to tackle complex challenges and extract value from data. I'm eager to connect, find me on [LinkedIn](https://www.linkedin.com/in/maur%C3%ADcio-estradiote-2096ab9b/)!
 
-  ## Índice de Projetos
+  ## Projects Index
 
-Vou listar aqui os projetos que desenvolvi até o momento. Cada pasta contém um ou mais *jupyter notebook* com o código e as análises detalhadas, além de um README específico explicando o desafio e os resultados.
+All the projects follow the pipeline EDA -> Feature Engineering -> Model Training -> Model Evaluation, there's a fluxogram that illustrates this process in the [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) project readme. Here's a list of all the projects I developed so far:
 
-* ### 🚀 [Spaceship Titanic - Previsão de Transporte](./spaceship-titanic/)
-    * **Descrição:** Análise e modelo de classificação (Random Forest) para prever quais passageiros foram transportados para outra dimensão.
-    * **Status:** *Pipeline* V1 (EDA -> Preproc -> *Tuning*) concluído. Modelos RF, LGBM e XGBoost atingiram performance similar: ~80% acurácia (validação) / ~0.791 (Kaggle). Próximo passo: Usar *insights* dos modelos e refinar a engenharia de *features*.
-
-* *(projetos futuros...)*
+* ### 🚀 [Spaceship Titanic - Previsão de Transporte](./spaceship-titanic/) (*In Portuguese*)
+    * **Description:** Analysis and predictive models to predict which passengers were transported to an alternate dimension.
+    * **Metric:**: Accuracy.
+    * **Status:** EDA and feature engineering was accomplished. `RandomizedSearchCV` was used to fine tuning the hyperparameters. The Random Forest, LGBM, and XGBoost models achieved similar performance: ~80% validation accuracy and a Kaggle score of ~0.791.
+    * **Next Step:** Leverage model insights to refine the feature engineering and try other methods such as ensembling.
+* ### [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) (*In English*)
+    * **Description:** Analysis and predictive models to recommend the best fertilizer. MLflows were applied to this project.
+    * **Metric:** MAP@3.
+    * **Status:** Only EDA was made. Random Forest and LGBM models were trained, where LGBM had the best score of 0.30930.
+    * **Next Step:** Apply feature engineering and apply a systematic method to fit the models. 
 
 ---
 
-## Tecnologias e Ferramentas
+## Tools & Technologies
 
-As principais ferramentas utilizadas neste repositório incluem: Python, Pandas, NumPy, Scikit-learn, Seaborn, Matplotlib, Jupyter Notebook, Git, GitHub.
+Python | Pandas | NumPy | Scikit-learn | Seaborn | Matplotlib | Jupyter Notebook | Git | GitHub | MLflow
