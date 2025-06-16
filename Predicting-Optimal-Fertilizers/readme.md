@@ -65,7 +65,7 @@ The modeling process was iterative. A baseline was established first, followed b
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [your-repository-url]
+    git clone [https://github.com/mau-estradiote/Kaggle-datasets/tree/master/Predicting-Optimal-Fertilizers]
     cd Predicting-Optimal-Fertilizer
     ```
 
