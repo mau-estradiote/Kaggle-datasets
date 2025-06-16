@@ -14,11 +14,11 @@ This repository is dedicated to applying practical Machine Learning techniques t
 
   ## Projects Index
 
-All the projects follow the pipeline EDA -> Feature Engineering -> Model Training -> Model Evaluation, there's a fluxogram that illustrates this process in the [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) project readme. Here's a list of all the projects I developed so far:
+All the projects follow the pipeline EDA -> Feature Engineering -> Model Training -> Model Evaluation, there's a fluxogram that illustrates this process in the [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) project's readme. Here's a list of all the projects I developed so far:
 
 * ### 🚀 [Spaceship Titanic - Previsão de Transporte](./spaceship-titanic/) (*In Portuguese*)
     * **Description:** Analysis and predictive models to predict which passengers were transported to an alternate dimension.
-    * **Metric:**: Accuracy.
+    * **Metric:** Accuracy.
     * **Status:** EDA and feature engineering was accomplished. `RandomizedSearchCV` was used to fine tuning the hyperparameters. The Random Forest, LGBM, and XGBoost models achieved similar performance: ~80% validation accuracy and a Kaggle score of ~0.791.
     * **Next Step:** Leverage model insights to refine the feature engineering and try other methods such as ensembling.
 * ### [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) (*In English*)
