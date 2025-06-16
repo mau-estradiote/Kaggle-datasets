@@ -21,7 +21,7 @@ All the projects follow the pipeline EDA -> Feature Engineering -> Model Trainin
     * **Metric:** Accuracy.
     * **Status:** EDA and feature engineering was accomplished. `RandomizedSearchCV` was used to fine tuning the hyperparameters. The Random Forest, LGBM, and XGBoost models achieved similar performance: ~80% validation accuracy and a Kaggle score of ~0.791.
     * **Next Step:** Leverage model insights to refine the feature engineering and try other methods such as ensembling.
-* ### [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) (*In English*)
+* ### 🌱 [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) (*In English*)
     * **Description:** Analysis and predictive models to recommend the best fertilizer. MLflows were applied to this project.
     * **Metric:** MAP@3.
     * **Status:** Only EDA was made. Random Forest and LGBM models were trained, where LGBM had the best score of 0.30930.
