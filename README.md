@@ -1,4 +1,4 @@
-# Machine Learning Projects Repository
+# 📊 Machine Learning Projects Repository
 
 Welcome to my Data Science and Machine Learning Projects repository!
 
@@ -10,9 +10,9 @@ This repository is dedicated to applying practical Machine Learning techniques t
 * Implementing and Evaluating Predictive Models (e.g., Classification, Regression)
 * Interpretation of Metrics and Results
 
-  **About me:** I am a Physicist with a Master's in Applied Physics (USP) now pivoting into Data Science. I leverage my rigorous analytical and problem-solving background to tackle complex challenges and extract value from data. I'm eager to connect, find me on [LinkedIn](https://www.linkedin.com/in/maur%C3%ADcio-estradiote-2096ab9b/)!
+🙋‍♂️ **About me:** I am a Physicist with a Master's in Applied Physics (USP) now pivoting into Data Science. I leverage my rigorous analytical and problem-solving background to tackle complex challenges and extract value from data. I'm eager to connect, find me on [LinkedIn](https://www.linkedin.com/in/maur%C3%ADcio-estradiote-2096ab9b/)!
 
-  ## Projects Index
+## 🗂️ Projects Index
 
 All the projects follow the pipeline EDA -> Feature Engineering -> Model Training -> Model Evaluation, there's a fluxogram that illustrates this process in the [Predicting Optimal Fertilizer](./Predicting-Optimal-Fertilizers/) project's readme. Here's a list of all the projects I developed so far:
 
@@ -29,6 +29,6 @@ All the projects follow the pipeline EDA -> Feature Engineering -> Model Trainin
 
 ---
 
-## Tools & Technologies
+## 🛠️ Tools & Technologies
 
 Python | Pandas | NumPy | Scikit-learn | Seaborn | Matplotlib | Jupyter Notebook | Git | GitHub | MLflow
