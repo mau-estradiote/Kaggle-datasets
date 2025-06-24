@@ -1,4 +1,4 @@
-# Predicting Optimal Fertilizer
+# 🌱 Predicting Optimal Fertilizer
 
 ## 🎯 Introduction and Goal
 
