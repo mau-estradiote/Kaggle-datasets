@@ -134,6 +134,8 @@ The modeling process was iterative and tracked with MLflow. A baseline was estab
 | Experiment ID | Key Change / Hypothesis | Validation MAP@3 | Key Learning |
 | :--- | :--- | :--- | :--- |
 | **Run 1** | **Baseline Model** (No Feature Engineering) | 0.30930 | LGBM outperforms RF. `Soil Type` and nutrient levels are the top features. Model confidence is low. |
+| **Run 2** | **Feature Engineering**: Tried to capture features synergy by multiplying some of then. Added proportion of nutrient and ratio of surplus. | 0.30180 | XGB outperforms RF and LGBM. All numerical features are the most important ones. Worst performance with feature engineering. |
+| **Run 3** | **Tune hyperparameters** | 0.30290 | Still worst performance with feature engineering, although some improvement on the score with the parameters tunning. |
 
 ---
 

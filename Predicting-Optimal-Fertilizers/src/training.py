@@ -3,6 +3,7 @@ import numpy as np
 import mlflow
 import mlflow.sklearn
 from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV
 
 def train_and_log_models(X_train: pd.DataFrame, y_train: pd.Series, models_to_run: list, all_models: dict, all_params: dict, n_iter=10, cv=3):
 
@@ -33,7 +34,13 @@ def train_and_log_models(X_train: pd.DataFrame, y_train: pd.Series, models_to_ru
 
             mlflow.log_metric("best_cv_neg_log_loss", rscv.best_score_)
 
-            mlflow.sklearn.log_model(rscv.best_estimator_, f"model_{model_name}")
+            input_example = X_train.head()
+
+            mlflow.sklearn.log_model(
+                sk_model=rscv.best_estimator_, 
+                name=f"model_{model_name}", 
+                input_example=input_example 
+            )
             
             print(f"Finished training for {model_name}. Best CV Score: {rscv.best_score_:.4f}")
             

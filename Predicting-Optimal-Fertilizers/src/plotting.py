@@ -57,7 +57,8 @@ def plot_bar_chart(df: pd.DataFrame, col_list: list, targ_col: str, stacked: boo
 
 def plot_Plift_heatmap(df: pd.DataFrame, col_list: list, targ_col: str, Plog: bool = False):
     col_list2 = col_list.copy()
-    col_list2.remove(targ_col)
+    if targ_col in col_list2:
+        col_list2.remove(targ_col)
     fert_counts = df[targ_col].value_counts(normalize=True)
     for col in col_list2:
         crosstab = pd.crosstab(df[col], df[targ_col], normalize='index')
@@ -74,3 +75,13 @@ def plot_Plift_heatmap(df: pd.DataFrame, col_list: list, targ_col: str, Plog: bo
                     fmt='.1f',
                     center=0)
     del col_list2
+
+def plot_hist(df: pd.DataFrame, col_list: list):
+    for col in col_list:
+        fig, ax = plt.subplots(figsize=(12, 8))
+        sns.histplot(data=df, x=col, ax=ax, stat='proportion')
+        ax.set_title(f'Distribution of {col}')
+        ax.set_xlabel(col)
+        ax.set_ylabel('Frequency')
+        plt.show()
+        

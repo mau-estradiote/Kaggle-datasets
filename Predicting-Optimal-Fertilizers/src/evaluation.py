@@ -21,16 +21,20 @@ def calculate_map3(y_true, y_pred_proba):
         score = np.mean(scores)
     return np.mean(scores)
 
-def plot_confusion_matrix(model, X_val, y_val, class_names):
+def plot_confusion_matrix(model, X_val, y_val, class_names, norm=None):
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    
+    norms = ['true', 'pred', 'all', None]
+    if norm not in norms:
+        raise ValueError(f"Invalid value for 'parameter_name': '{norm}'. "
+                         f"Allowed values are: {', '.join(norms)}")
     ConfusionMatrixDisplay.from_estimator(
         model,
         X_val,
         y_val,
         ax=ax,
         cmap='Blues',
+        normalize = norm,
         display_labels=class_names
     )
     
@@ -42,6 +46,7 @@ def plot_confusion_matrix(model, X_val, y_val, class_names):
 def plot_feature_importance(model, feature_names):
     
     importances = pd.Series(model.feature_importances_, index=feature_names)
+    importances = importances/ importances.sum()
     top_importances = importances.sort_values(ascending=False).head(20)
     
     plt.figure(figsize=(12, 8))
